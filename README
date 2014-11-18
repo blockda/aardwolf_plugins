@@ -1,0 +1,9 @@
+This is the mega repository for the aardwolf specific scripts. They are grouped together because some they all involve specific aardwolf game mechanics like moons and the ascii map. Note that this does not include the chat window plugin and specifically requires it to be loaded before the aardwolf plugin package (I think) if in doubt just use the all in one aardwolf-blowtorch bundle that will do it all. 
+
+Currently this will only work well on tablets. It can be installed on phones but it is not programmed well for multi-display resolution and size just yet. There are many bugs. Settings are not saved. Some things will look poor like the moon phase tick clock.
+
+There are a ton of settings that must be enabled for this all to work. I will log them here in the future and one day BlowTorch will be smart enough to send it automatically.
+
+Once installed all of the plugins have options. Additionally the window layout manager installs commands to change the layouts to a couple of different presets. ".layout [0-5]" will switch them.
+
+Certain plugins make use of GMCP which must be enabled in the client and on aardwolf. Instructions to follow.
