@@ -7,3 +7,5 @@ There are a ton of settings that must be enabled for this all to work. I will lo
 Once installed all of the plugins have options. Additionally the window layout manager installs commands to change the layouts to a couple of different presets. ".layout [0-5]" will switch them.
 
 Certain plugins make use of GMCP which must be enabled in the client and on aardwolf. Instructions to follow.
+
+Auto Hunt and WhichMob are self contained xml plugins and are not included in the main bundle installation. They must be manually added in addition to the aardwolf plugin group.
