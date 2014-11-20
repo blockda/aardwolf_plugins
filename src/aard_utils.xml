@@ -16,7 +16,18 @@
       </aliases>
       <triggers />
       <timers />
-      <options />
+      <options title="Layout Options" summary="Options for the layout of the Aardwolf Plugin widgets.">
+        <integer key="scroll_container_width" title="Scroll Container Width" summary="How wide the scroll container that contains the map is in density-independant pixels.">150</integer>
+        <integer key="bottom_container_height" title="Bottom Container Height" summary="How tall the container under the input bar is in density independant pixels.">70</integer>
+        <list title="Select Layout" key="selected_layout" summary="Select Layout">
+  	 			<value>3</value>
+  	 			<item>Layout 1</item>
+  	 			<item>Layout 2</item>
+  	 			<item>Layout 3</item>
+  	 			<item>Layout 4</item>
+  	 			<item>Layout 5</item>
+  	 		</list>
+      </options>
       <script name="foreground"><![CDATA[
             dofile(GetPluginInstallDirectory().."/foregroundboot.lua")
         ]]>
