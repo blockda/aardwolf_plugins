@@ -13,10 +13,12 @@ local Color = luajava.bindClass("android.graphics.Color")
 local LinearGradient = luajava.bindClass("android.graphics.LinearGradient")
 local PorterDuffXfermode = luajava.bindClass("android.graphics.PorterDuffXfermode")
 local PorterDuffMode = luajava.bindClass("android.graphics.PorterDuff$Mode")
-local TileMode = luajava.bindClass("android.graphics.Shader$TileMode")
-Paint = luajava.bindClass("android.graphics.Paint")
+TileMode = luajava.bindClass("android.graphics.Shader$TileMode")
 local Style = luajava.bindClass("android.graphics.Paint$Style")
 local RectF = luajava.bindClass("android.graphics.RectF")
+local android_R_style = luajava.bindClass("android.R$style");
+local TextAppearanceMedium = android_R_style.TextAppearance_Medium
+local TextAppearanceSmall = android_R_style.TextAppearance_Small
 
 local Integer = luajava.newInstance("java.lang.Integer",0)
 local IntegerClass = Integer:getClass()
@@ -221,12 +223,12 @@ function OnDraw(c)
 	tmp.grey = timers.grey or "??"
 	tmp.white = timers.white or "??"
 	
-	c:drawText(string.format("%s",tmp.black),5*density,black_y,blackPaint)
-	c:drawText(string.format("%s",tmp.grey),5*density,grey_y,greyPaint)
-	c:drawText(string.format("%s",tmp.white),5*density,white_y,whitePaint)
+	c:drawText(string.format("%s",tmp.black),8*density,black_y,blackPaint)
+	c:drawText(string.format("%s",tmp.grey),8*density,grey_y,greyPaint)
+	c:drawText(string.format("%s",tmp.white),8*density,white_y,whitePaint)
 	
 	if(timers.forecast ~= nil and timers.forecast > -1) then
-		c:drawText(string.format("Three moons in: %d ticks, for %d ticks",timers.forecast,timers.duration),10*density,height-(5*density),whitePaint)
+		c:drawText(string.format("Three moons in: %d ticks, for %d ticks",timers.forecast,timers.duration),12*density,height-(5*density),whitePaint)
 	end
 	
 end
@@ -325,7 +327,7 @@ function updateAlphas()
 	subcountPercent = subcount / 12
 	if(timeordinal >= 6 and timeordinal <= 18) then
 		local tmp = timeordinal - 6 + subcountPercent
-		local alpha = 7.08*(tmp-6)*(tmp-6)
+		local alpha = (7.08*(tmp-6)*(tmp-6)/2)
 		if(alpha > 255) then
 			alpha = 255
 		elseif(alpha < 0) then
@@ -353,7 +355,7 @@ function updateAlphas()
 		elseif(timeordinal <= 6) then
 			tmp = 6+timeordinal + subcountPercent
 		end
-		alpha = (-7.08*(tmp-6)*(tmp-6))+255
+		alpha = ((-7.08*(tmp-6)*(tmp-6))/2)+255
 		if(alpha > 255) then
 			alpha = 255
 		elseif(alpha < 0) then
@@ -417,6 +419,28 @@ function OnSizeChanged(neww,newh,oldw,oldh)
 end
 
 function rebuildConstants()
+if(tonumber(height) <= 0) then return end
+skyGradientColors = {}
+table.insert(skyGradientColors,Color:argb(255,35,94,191))
+table.insert(skyGradientColors,Color:argb(255,83,118,191))
+
+skyGradientPositions = {}
+table.insert(skyGradientPositions,0.0)
+table.insert(skyGradientPositions,1.0)
+
+skyColors = makeIntArray(skyGradientColors)
+skyPositions = makeFloatArray(skyGradientPositions)
+
+--height = 100
+
+blueGradientShader = luajava.new(LinearGradient,0,0,0,tonumber(height),skyColors,nil,TileMode.REPEAT)
+
+bgSkyPaint = luajava.new(Paint)
+bgSkyPaint:setStyle(Style.STROKE)
+bgSkyPaint:setStrokeWidth(tonumber(height))
+bgSkyPaint:setShader(blueGradientShader)
+
+
 blackPaint = luajava.new(Paint)
 blackPaint:setStyle(Style.FILL)
 blackPaint:setAntiAlias(true)

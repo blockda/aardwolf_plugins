@@ -14,6 +14,7 @@ config.width = MATCH_PARENT
 config.gravity = 100
 config.id = view:getId()
 view:setTextSelectionEnabled(false)
+view:fitFontSize(28)
 InstallWindow(config)
 
 function requestLayout()
