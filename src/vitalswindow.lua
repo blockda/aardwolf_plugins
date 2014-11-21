@@ -3,6 +3,8 @@ package.path = package.path..";"..GetPluginInstallDirectory().."/?.lua"
 --debugPrint("in the chat window")
 require("miniwindow")
 
+local luajava = luajava
+
 Array = luajava.bindClass("java.lang.reflect.Array")
 Rect = luajava.bindClass("android.graphics.Rect")
 RectF = luajava.bindClass("android.graphics.RectF")
@@ -45,57 +47,57 @@ function makeIntArray(table)
 	return newarray
 end
 
-gradientColors = {}
+local gradientColors = {}
 table.insert(gradientColors,Color.RED)
 table.insert(gradientColors,Color.DKGRAY)
 table.insert(gradientColors,Color.LTGRAY)
 table.insert(gradientColors,Color.DKGRAY)
 table.insert(gradientColors,Color.YELLOW)
 
-gradientPositions = {}
+local gradientPositions = {}
 table.insert(gradientPositions,0.0)
 table.insert(gradientPositions,0.325)
 table.insert(gradientPositions,0.5)
 table.insert(gradientPositions,0.675)
 table.insert(gradientPositions,1.0)
 
-gColors = makeIntArray(gradientColors)
-gPositions = makeFloatArray(gradientPositions)
+local gColors = makeIntArray(gradientColors)
+local gPositions = makeFloatArray(gradientPositions)
 
-zeroFloat = luajava.newInstance("java.lang.Float",0)
-widthFloat = luajava.newInstance("java.lang.Float",view:getWidth())
-alignPosFloat = luajava.newInstance("java.lang.Float",0)
-alignPercent = 0.5
-alignIndicatorX = 0
-alignShader = luajava.new(LinearGradient,zeroFloat:floatValue(),zeroFloat:floatValue(),widthFloat:floatValue(),zeroFloat:floatValue(),gColors,gPositions,TileMode.REPEAT)
+local zeroFloat = luajava.newInstance("java.lang.Float",0)
+local widthFloat = luajava.newInstance("java.lang.Float",view:getWidth())
+local alignPosFloat = luajava.newInstance("java.lang.Float",0)
+local alignPercent = 0.5
+local alignIndicatorX = 0
+local alignShader = luajava.new(LinearGradient,zeroFloat:floatValue(),zeroFloat:floatValue(),widthFloat:floatValue(),zeroFloat:floatValue(),gColors,gPositions,TileMode.REPEAT)
 
 --make the hp/mp/tnl "top" gradient
-vertGradientColors = {}
+local vertGradientColors = {}
 table.insert(vertGradientColors,Color:argb(0,180,180,180))
 table.insert(vertGradientColors,Color:argb(200,30,30,30))
 table.insert(vertGradientColors,Color:argb(0,180,180,180))
 
-vgColors = makeIntArray(vertGradientColors)
+local vgColors = makeIntArray(vertGradientColors)
 --no positions, even spacing is fine.
 vertShader = luajava.new(LinearGradient,0,0,0,0,vgColors,nil,TileMode.REPEAT)
 
-hprect = luajava.new(RectF)
-manarect = luajava.new(RectF)
-enemyrect = luajava.new(RectF)
-tnlrect = luajava.new(RectF)
+local hprect = luajava.new(RectF)
+local manarect = luajava.new(RectF)
+local enemyrect = luajava.new(RectF)
+local tnlrect = luajava.new(RectF)
 
-Paint = luajava.bindClass("android.graphics.Paint")
-Style = luajava.bindClass("android.graphics.Paint$Style")
+local Paint = luajava.bindClass("android.graphics.Paint")
+local Style = luajava.bindClass("android.graphics.Paint$Style")
 
-hppaint = luajava.new(Paint)
-manapaint = luajava.new(Paint)
-enemypaint = luajava.new(Paint)
-tnlpaint = luajava.new(Paint)
-alignpaint = luajava.new(Paint)
-topperBorderPaint = luajava.new(Paint)
-topperDividerPaint = luajava.new(Paint)
-topperGradientPaint = luajava.new(Paint)
-alignIndicatorPaint = luajava.new(Paint)
+local hppaint = luajava.new(Paint)
+local manapaint = luajava.new(Paint)
+local enemypaint = luajava.new(Paint)
+local tnlpaint = luajava.new(Paint)
+local alignpaint = luajava.new(Paint)
+local topperBorderPaint = luajava.new(Paint)
+local topperDividerPaint = luajava.new(Paint)
+local topperGradientPaint = luajava.new(Paint)
+local alignIndicatorPaint = luajava.new(Paint)
 
 
 hppaint:setStyle(Style.FILL)
@@ -132,19 +134,19 @@ manapaint:setARGB(255,0,0,255)
 enemypaint:setARGB(255,255,0,0)
 tnlpaint:setARGB(255,230,169,35)
 
-width = 0
-height = 0
+local width = 0
+local height = 0
 
-vitals = {}
+local vitals = {}
 vitals.hp = 100
 vitals.mp = 100
 
-maxes = {}
+local maxes = {}
 maxes.hp = 100
 maxes.mp = 100
 
-tnl = 0
-tolevel = 0
+local tnl = 0
+local tolevel = 0
 
 enemypct = 0
 
@@ -169,9 +171,9 @@ function OnDraw(canvas)
 	canvas:drawBitmap(topper,0,0,nil)
 	
 	if(vertical) then
-		canvas:drawCircle(alignPosFloat:floatValue(),alignIndicatorX,height/20,alignIndicatorPaint)
+		canvas:drawCircle(alignPosFloat:floatValue(),alignIndicatorX,width/20,alignIndicatorPaint)
 	else
-		canvas:drawCircle(alignIndicatorX,alignPosFloat:floatValue(),width/20,alignIndicatorPaint)
+		canvas:drawCircle(alignIndicatorX,alignPosFloat:floatValue(),height/20,alignIndicatorPaint)
 	end
 	--canvas
 end
