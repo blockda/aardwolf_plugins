@@ -171,7 +171,7 @@ function OnDraw(canvas)
 	if(vertical) then
 		canvas:drawCircle(alignPosFloat:floatValue(),alignIndicatorX,height/20,alignIndicatorPaint)
 	else
-		canvas:drawCircle(alignIndicatorX,alignPosFloat:floatValue(),height/20,alignIndicatorPaint)
+		canvas:drawCircle(alignIndicatorX,alignPosFloat:floatValue(),width/20,alignIndicatorPaint)
 	end
 	--canvas
 end
