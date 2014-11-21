@@ -410,7 +410,7 @@ function updateBarRects()
 	
 	tnlpercent = 0
 	if(tolevel > 0) then
-		tnlpercent = tnl/tolevel
+		tnlpercent = 100 - tnl/tolevel
 		--debugPrint("updateBarRects, tnlpercent is:"..tnlpercent)
 	end
 
