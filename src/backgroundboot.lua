@@ -44,7 +44,7 @@ function setBottomContainerHeight(value)
 end
 
 function setLayoutFromPreferences(value)
-  WindowXCallS("layout_manager","LoadLayout",value + 1)
+  WindowXCallS("layout_manager","SetSelectedLayout",tonumber(value) + 1)
 end
 
 optionsTable = {}

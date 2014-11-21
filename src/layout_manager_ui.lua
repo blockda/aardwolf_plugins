@@ -35,6 +35,13 @@ Containers.id = {}
 
 Containers.views = {}
 
+local bottom_container_height = GetOptionValue("bottom_container_height")
+local scroll_container_width = GetOptionValue("scroll_container_width")
+local selected_layout = (GetOptionValue("selected_layout")) + 1
+
+Note("\nLayout Manager Option Query: bottom_container_height: "..bottom_container_height.."\n")
+Note("Layout Manager Option Query: scroll_container_width: "..scroll_container_width.."\n")
+
 Layouts = {}
 local chat_window_installed = PluginInstalled("chat_miniwindow")
 
@@ -221,7 +228,7 @@ function LoadLayout(layout)
 end
 
 function OnCreate()
-	LoadLayout(layout_config.mode)
+	LoadLayout(selected_layout)
 end
 
 --debug.sethook(call,"c")
@@ -243,7 +250,7 @@ install_dir = GetPluginInstallDirectory()
 --read the layout manager configuration from disk, right now this just consists of the layout mode
 layout_config = ReadFile(string.format("%s/layout_manager_props",install_dir))
 if(not layout_config) then 
-	layout_config = {mode=4,scroll_width=300,containers={}}
+	layout_config = {mode=4,scroll_width=scroll_container_width,bottom_height=bottom_container_height,containers={}}
 	layout_config.containers.ScrollView1 = {}
 	layout_config.containers.ScrollView1.gravcount = 1
 	layout_config.configs = {}
@@ -268,7 +275,7 @@ local scroll_target = luajava.new(LinearLayout,context)
 
 local scrollViewConfig_0 = {}
 scrollViewConfig_0.id = 886795
-scrollViewConfig_0.width = 600
+scrollViewConfig_0.width = tonumber(scroll_container_width)
 scrollViewConfig_0.height = 100
 scrollViewConfig_0.type = "relative"
 scrollViewConfig_0.target = "root"
@@ -427,7 +434,7 @@ bottomHolderConfig_0.affects.inputBar[RelativeLayout.ABOVE] = 9983
 
 local bottomHolderConfig_2 = {}
 setmetatable(bottomHolderConfig_2,{__index = bottomHolderConfig_0})
-bottomHolderConfig_2.height = 50*density
+bottomHolderConfig_2.height = tonumber(bottom_container_height)
 
 layout_config.configs[1][bottomHolderConfig_0.id] = bottomHolderConfig_0
 layout_config.configs[2][bottomHolderConfig_2.id] = bottomHolderConfig_2
@@ -567,5 +574,29 @@ function dump(o)
 		return tostring(o)
 	end
 end
+
+local bottom_container_height = GetOptionValue("bottom_container_height")
+local scroll_container_width = GetOptionValue("scroll_container_width")
+
+function SetBottomContainerHeight(value)
+  bottomHolderConfig_2.height = tonumber(value)
+  --layout_config.configs[2][bottomHolderConfig_2.id].height = tonumber(bottom_container_height)
+  LoadLayout(selected_layout)
+end
+
+function SetScrollContainerWidth(value)
+  scrollViewConfig_0.width = tonumber(value)
+  LoadLayout(selected_layout)
+end
+
+function SetSelectedLayout(value)
+  selected_layout = tonumber(value)
+  LoadLayout(selected_layout)
+end
+
+--Note("\nLayout Manager Option Query: bottom_container_height: "..bch.."\n")
+--Note("Layout Manager Option Query: scroll_container_width: "..sch.."\n")
+
+
 
 --debug.sethook()
