@@ -27,7 +27,10 @@ body {
 		]]>
       </description>
       <windows />
-      <aliases />
+      	<aliases>
+				<alias pre="^ah (.+)$" post="/start(&apos;$1&apos;)" enabled="true" />
+	</aliases>
+
       <triggers>
         <trigger title="door1" pattern="^Magical wards around the .*? bounce you back\.$" regexp="true" sequence="1" group="autohunt" keepEvaluating="true">
           <script function="openDoor" fireWhen="always" />
@@ -159,7 +162,7 @@ body {
 
 			RegisterSpecialCommand("ah","start")
 
-			Note("Aut Hunt Plugin installed")
+			Note("Auto Hunt Plugin installed")
 			
 		]]>
       </script>

@@ -93,7 +93,6 @@ view:setCenterJustify(true)
 view:setLinksEnabled(false)
 view:setTextSelectionEnabled(false)
 view:setScrollingEnabled(false)
-
 Color = luajava.bindClass("android.graphics.Color")
 
 timeordinal = 0
@@ -170,7 +169,7 @@ local compact_format =
 %sint: %s[%4d]  %swis: %s[%4d] %sluck: %s[%4d]%s
 %s hr: %s[%4d]  %s dr: %s[%4d] %ssave: %s[%4d]%s]]
 
-function updateStats(data)
+function updateInfo(data)
 	--Note("\nstat data:"..data.."\n")
 
 	stats = loadstring(data)()
@@ -180,10 +179,12 @@ function updateStats(data)
 	local nwhit = "\27[0;37m"
 	
 	--local start_time = System:currentTimeMillis()
-	if(not stats.str) then return end
+	if(not stats.start) then return end
 	
 	view:clearText()
-	view:addText(string.format(compact_format,dcyan,bwhit,stats.str,dcyan,bwhit,stats.dex,dcyan,bwhit,stats.con,nwhit,dcyan,bwhit,stats.int,dcyan,bwhit,stats.wis,dcyan,bwhit,stats.luck,nwhit,dcyan,bwhit,stats.hr,dcyan,bwhit,stats.dr,dcyan,bwhit,stats.saves,nwhit),true)
+	view:addText(string.format("XP Total: %d", stats.totalxp),true)
+	--view:addText("text is here",true)
+	--view:addText(string.format(compact_format,dcyan,bwhit,stats.str,dcyan,bwhit,stats.dex,dcyan,bwhit,stats.con,nwhit,dcyan,bwhit,stats.int,dcyan,bwhit,stats.wis,dcyan,bwhit,stats.luck,nwhit,dcyan,bwhit,stats.hr,dcyan,bwhit,stats.dr,dcyan,bwhit,stats.saves,nwhit),true)
 	--view:addText(string.format("%sstr: %s[%4d]  %sdex: %s[%4d]  %scon: %s[%4d]%s\n",dcyan,bwhit,stats.str,dcyan,bwhit,stats.dex,dcyan,bwhit,stats.con,nwhit),true)
 	--view:addText(string.format("%sint: %s[%4d]  %swis: %s[%4d] %sluck: %s[%4d]%s\n",dcyan,bwhit,stats.int,dcyan,bwhit,stats.wis,dcyan,bwhit,stats.luck,nwhit),true)
 	--view:addText(string.format("%s hr: %s[%4d]  %s dr: %s[%4d] %ssave: %s[%4d]%s\n",dcyan,bwhit,stats.hr,dcyan,bwhit,stats.dr,dcyan,bwhit,stats.saves,nwhit),true)
@@ -230,5 +231,5 @@ statPaint:setColor(ColorCompat:argb(255,200,200,200))
 statPaint:setAntiAlias(true)
 statPaint:setTypeface(Typeface.MONOSPACE)
 
-PluginXCallS("loadStats","")
+PluginXCallS("loadInfo","")
 --debugPrint("statwindow ui startup complete")

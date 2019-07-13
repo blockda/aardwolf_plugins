@@ -237,6 +237,7 @@ end
 ScrollView = luajava.bindClass("android.widget.ScrollView")
 FrameLayoutParams = luajava.bindClass("android.widget.FrameLayout$LayoutParams")
 Color = luajava.bindClass("android.graphics.Color")
+local ColorCompat = luajava.bindClass("com.offsetnull.bt.ui.ColorCompat")
 local offsetnull_R_drawable = luajava.bindClass("com.offsetnull.bt.R$drawable")
 
 context = view:getContext()
@@ -371,7 +372,7 @@ layout_config.configs[5][divider0Config_0.id] = divider0Config_4
 --end
 --scroll_view_params:addRule(RelativeLayout.ALIGN_PARENT_RIGHT)
 --scroll_view:setLayoutParams(scroll_view_params)
-scroll_view:setBackgroundColor(Color:argb(255,0,0,0))
+scroll_view:setBackgroundColor(ColorCompat:argb(255,0,0,0))
 scroll_target:setId(886794)
 
 local linear_layout_params = luajava.new(LinearLayoutParams,MATCH_PARENT,MATCH_PARENT)

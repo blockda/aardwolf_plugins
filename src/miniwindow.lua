@@ -6,7 +6,7 @@ RelativeLayout = luajava.bindClass("android.widget.RelativeLayout")
 RelativeLayoutParams = luajava.bindClass("android.widget.RelativeLayout$LayoutParams")
 View = luajava.bindClass("android.view.View")
 Color = luajava.bindClass("android.graphics.Color")
-
+local ColorCompat = luajava.bindClass("com.offsetnull.bt.ui.ColorCompat")
 MATCH_PARENT = LinearLayoutParams.FILL_PARENT
 WRAP_CONTENT = LinearLayoutParams.WRAP_CONTENT
 
@@ -114,7 +114,7 @@ end
 
 function MakeDivider(context)
 	local tmp = luajava.new(View,context)
-	tmp:setBackgroundColor(Color:argb(255,68,68,136))
+	tmp:setBackgroundColor(ColorCompat:argb(255,68,68,136))
 	return tmp
 end
 

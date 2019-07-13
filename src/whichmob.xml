@@ -54,6 +54,9 @@ body {
 				<script function="finish" fireWhen="always"/>
 			</trigger>
 		</triggers>
+			<aliases>
+				<alias pre="^ht (.+)$" post="/start(&apos;$1&apos;)" enabled="true" />
+			</aliases>
 		
 		<script name="bootstrap">
 			<![CDATA[

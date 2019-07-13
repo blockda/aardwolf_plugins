@@ -92,7 +92,7 @@
         <trigger title="mob_9" pattern="A high guard of Nox" group="mobs">
           <color text="247" background="18" />
         </trigger>
-        <trigger title="end" pattern="^(You may take a campaign at this level.|You will have to level before you can go on another campaign.)$" regexp="true" enabled="false">
+        <trigger title="end" pattern="^(You may take a campaign at this level.|You will have to level before you can go on another campaign.|You may take another campaign.)$" regexp="true" enabled="false">
           <script function="endCapture" fireWhen="always" />
         </trigger>
       </triggers>

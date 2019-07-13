@@ -14,6 +14,9 @@ TileMode = luajava.bindClass("android.graphics.Shader$TileMode")
 Bitmap = luajava.bindClass("android.graphics.Bitmap")
 BitmapConfig = luajava.bindClass("android.graphics.Bitmap$Config")
 RelativeLayout = luajava.bindClass("android.widget.RelativeLayout")
+--PorterDuff = luajava.bindClass("anroid.graphics.PorterDuff")
+PorterDuffMode = luajava.bindClass("android.graphics.PorterDuff$Mode")
+ColorCompat = luajava.bindClass("com.offsetnull.bt.ui.ColorCompat")
 
 Integer = luajava.newInstance("java.lang.Integer",0)
 IntegerClass = Integer:getClass()
@@ -73,9 +76,9 @@ local alignShader = luajava.new(LinearGradient,zeroFloat:floatValue(),zeroFloat:
 
 --make the hp/mp/tnl "top" gradient
 local vertGradientColors = {}
-table.insert(vertGradientColors,Color:argb(0,180,180,180))
-table.insert(vertGradientColors,Color:argb(200,30,30,30))
-table.insert(vertGradientColors,Color:argb(0,180,180,180))
+table.insert(vertGradientColors,ColorCompat:argb(0,180,180,180))
+table.insert(vertGradientColors,ColorCompat:argb(200,30,30,30))
+table.insert(vertGradientColors,ColorCompat:argb(0,180,180,180))
 
 local vgColors = makeIntArray(vertGradientColors)
 --no positions, even spacing is fine.
@@ -263,6 +266,7 @@ end
 
 function updateToppers()
 	rect = luajava.new(Rect)
+	--topperCanvas:drawARGB(0,255,255,255)
 	if(vertical) then
 		rect:set(0,0,widthOver5,height)
 	else
@@ -412,7 +416,7 @@ function updateBarRects()
 	
 	tnlpercent = 0
 	if(tolevel > 0) then
-		tnlpercent = 100 - tnl/tolevel
+		tnlpercent = 1 - tnl/tolevel
 		--debugPrint("updateBarRects, tnlpercent is:"..tnlpercent)
 	end
 
@@ -424,7 +428,7 @@ function updateBarRects()
 		hprect:set(0,height*(1-hppct),widthOver5,height)
 		manarect:set(widthOver5,height*(1-manapct),widthOver5*2,height)
 		enemyrect:set(widthOver5*2,height*(1-enemyval),widthOver5*3,height)	
-		tnlrect:set(widthOver5*3,height*(1-tnlpercent),widthOver5*4,height)
+		tnlrect:set(widthOver5*3,height*tnlpercent,widthOver5*4,height)
 	else
 		--heightOver5 = math.floor(height / 5)
 		hprect:set(0,0,width*hppct,heightOver5)

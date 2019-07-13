@@ -17,6 +17,7 @@ TileMode = luajava.bindClass("android.graphics.Shader$TileMode")
 local Style = luajava.bindClass("android.graphics.Paint$Style")
 local RectF = luajava.bindClass("android.graphics.RectF")
 local android_R_style = luajava.bindClass("android.R$style");
+local ColorCompat = luajava.bindClass("com.offsetnull.bt.ui.ColorCompat")
 local TextAppearanceMedium = android_R_style.TextAppearance_Medium
 local TextAppearanceSmall = android_R_style.TextAppearance_Small
 
@@ -293,8 +294,8 @@ ScheduleCallback(100,"subCount",normalSubDelay)
 
 --build up the gradient objects we need.
 skyGradientColors = {}
-table.insert(skyGradientColors,Color:argb(255,35,94,191))
-table.insert(skyGradientColors,Color:argb(255,83,118,191))
+table.insert(skyGradientColors,ColorCompat:argb(255,35,94,191))
+table.insert(skyGradientColors,ColorCompat:argb(255,83,118,191))
 
 skyGradientPositions = {}
 table.insert(skyGradientPositions,0.0)
@@ -315,13 +316,13 @@ porterduff = luajava.new(PorterDuffXfermode,PorterDuffMode.DARKEN)
 fgSkyPaint = luajava.new(Paint)
 fgSkyPaint:setStyle(Style.FILL)
 fgSkyPaint:setXfermode(porterduff)
-fgSkyPaint:setColor(Color:argb(255,237,22,22))
+fgSkyPaint:setColor(ColorCompat:argb(255,237,22,22))
 
 porterduff = luajava.new(PorterDuffXfermode,PorterDuffMode.DARKEN)
 fgNightPaint = luajava.new(Paint)
 fgNightPaint:setStyle(Style.FILL)
 fgNightPaint:setXfermode(porterduff)
-fgNightPaint:setColor(Color:argb(255,9,24,54))
+fgNightPaint:setColor(ColorCompat:argb(255,9,24,54))
 
 function updateAlphas()
 	subcountPercent = subcount / 12
@@ -372,11 +373,11 @@ end
 timerFramePaint = luajava.new(Paint)
 timerFramePaint:setStyle(Style.STROKE)
 timerFramePaint:setStrokeWidth(3)
-timerFramePaint:setColor(Color:argb(255,15,15,127))
+timerFramePaint:setColor(ColorCompat:argb(255,15,15,127))
 timerFramePaint:setAntiAlias(true)
 
 timerFrameBg = luajava.new(Paint)
-timerFrameBg:setColor(Color:argb(180,172,172,172))
+timerFrameBg:setColor(ColorCompat:argb(180,172,172,172))
 timerFrameBg:setStyle(Style.FILL)
 
 timerFrameRect = luajava.new(RectF)
@@ -411,7 +412,7 @@ function OnSizeChanged(neww,newh,oldw,oldh)
 	clocktextsize = newh/2.2
 	clockpaint = luajava.newInstance("android.graphics.Paint")
 	clockpaint:setTextSize(clocktextsize)
-	clockfacecolor = Color:argb(255,0,0,255)
+	clockfacecolor = ColorCompat:argb(255,0,0,255)
 	clockpaint:setColor(clockfacecolor)
 	clockpaint:setAntiAlias(true)
 	
@@ -421,8 +422,8 @@ end
 function rebuildConstants()
 if(tonumber(height) <= 0) then return end
 skyGradientColors = {}
-table.insert(skyGradientColors,Color:argb(255,35,94,191))
-table.insert(skyGradientColors,Color:argb(255,83,118,191))
+table.insert(skyGradientColors,ColorCompat:argb(255,35,94,191))
+table.insert(skyGradientColors,ColorCompat:argb(255,83,118,191))
 
 skyGradientPositions = {}
 table.insert(skyGradientPositions,0.0)
@@ -444,17 +445,17 @@ bgSkyPaint:setShader(blueGradientShader)
 blackPaint = luajava.new(Paint)
 blackPaint:setStyle(Style.FILL)
 blackPaint:setAntiAlias(true)
-blackPaint:setColor(Color:argb(255,150,12,150))
+blackPaint:setColor(ColorCompat:argb(255,150,12,150))
 
 whitePaint = luajava.new(Paint)
 whitePaint:setStyle(Style.FILL)
 whitePaint:setAntiAlias(true)
-whitePaint:setColor(Color:argb(255,250,250,250))
+whitePaint:setColor(ColorCompat:argb(255,250,250,250))
 
 greyPaint = luajava.new(Paint)
 greyPaint:setStyle(Style.FILL)
 greyPaint:setAntiAlias(true)
-greyPaint:setColor(Color:argb(255,127,127,127))
+greyPaint:setColor(ColorCompat:argb(255,127,127,127))
 
 travel={}
 travel.sun = width/2

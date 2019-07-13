@@ -1,0 +1,83 @@
+<?xml version='1.0' encoding='UTF-8' standalone='yes' ?>
+<blowtorch xmlversion="2">
+<plugins>
+	<plugin name="Rate Tracker" id="24651">
+		<author>Daniel Block</author>
+		<description>
+		<![CDATA[
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Untitled Document</title>
+<style type="text/css">
+body {
+	color: #999;
+}
+</style>
+</head>
+
+<body>
+<h3>Rate Tracker
+  </p>
+</h3>
+<p>Tracks rates of xp/minute gold/min etc. Has Mini-Window.</p>
+</body>
+</html>
+		]]>
+		</description>
+      <windows>
+        <window name="rate_track" id="66548" script="initRateTrackUI">
+          <layoutGroup target="large">
+            <layout orientation="landscape" below="9020" width="200" height="50" />
+            <layout orientation="portrait" width="fill_parent" height="fill_parent" />
+          </layoutGroup>
+          <layoutGroup target="xlarge">
+            <layout orientation="landscape" below="9020" width="400" height="100" />
+            <layout orientation="portrait" width="fill_parent" height="fill_parent" />
+          </layoutGroup>
+          <options>
+            <option key="font_size">13</option>
+            <option key="line_extra">2</option>
+          </options>
+        </window>
+      </windows>
+      <aliases />
+      <triggers>
+        <trigger title="statmon" pattern="%char.stats" sequence="1">
+          <script function="updateStat" fireWhen="always" />
+        </trigger>
+	 <trigger title="normal_xp" pattern="^You receive (\d+)\+?(\d+)? experience points?\.$" regexp="true" enabled="true">
+          <script function="normalXP" fireWhen="always" />
+        </trigger>
+	 <trigger title="rare_xp" pattern="^You receive (\d+) &apos;rare kill&apos; experience bonus\.$" regexp="true" enabled="true">
+          <script function="rareXP" fireWhen="always" />
+        </trigger>
+	 <trigger title="sh_double_xp" pattern="^You receive (\d+) bonus experience points in honor of (\s+) reaching superhero\.$" regexp="true" enabled="true">
+          <script function="shDoubleXP" fireWhen="always" />
+        </trigger>
+	 <trigger title="daily_double_xp" pattern="^You receive (\d+) bonus experience points from your daily blessing\.$" regexp="true" enabled="true">
+          <script function="dailyDoubleXP" fireWhen="always" />
+        </trigger>
+	 <trigger title="donate_double_xp" pattern="^You receive (\d+) bonus experience points courtesy (.\s+)$" regexp="true" enabled="true">
+          <script function="donateDoubleXP" fireWhen="always" />
+        </trigger>
+      </triggers>
+      <timers />
+      <options />
+      <script name="initRateTrackUI"><![CDATA[
+	
+		dofile(GetPluginInstallDirectory().."/rateui.lua")
+	
+	]]>
+      </script>
+      <script name="bootstrap" execute="true"><![CDATA[
+	
+	      
+		dofile(GetPluginInstallDirectory().."/ratetracker.lua")
+
+	
+	]]>
+      </script>
+    </plugin>
+</plugins>
+</blowtorch>

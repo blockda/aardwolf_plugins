@@ -10,7 +10,7 @@ maxes = {}
 maxes.hp = 100
 maxes.mana = 100
 			
-enemyPct = 100
+enemyPct = 0
 			
 align = 0
 maxAlign = 2500
